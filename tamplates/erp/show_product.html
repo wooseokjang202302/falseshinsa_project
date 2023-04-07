@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    상품목록
+{% endblock %}
+{% block content %}
+
+<div class = "row mt-5">
+    <div class = "col-12">
+        <td><a href="{% url 'append_product' %}" class="btn btn-primary">상품등록</a></td>
+        <table style="width: 600px" class = "table table-dark">
+            <thead class = "thead thead-dark">
+                <th scope = "col">No.</th>
+                <th scope = "col">상품명</th>
+                <th scope = "col">사이즈</th>
+                <th scope = "col">가격</th>
+                <th scope = "col">재고</th>
+                <th scope = "col">상품수정</th>
+                <th scope = "col">입고</th>
+                <th scope = "col">출고</th>
+            </thead>
+            <tbody class = "text-light">
+                {% for product in product_list %}
+                <tr>
+                    <th scope = "col">{{product.id}}</th>
+                    <th>{{ product.name }}</th>
+                    <th>{{ product.size }}</th>
+                    <th>{{ product.price }}원</th>
+                    <th>{{ product.stock }}개</th>
+                    <td><a href="{% url 'edit_product' product.code %}" class="btn btn-primary">수정</a></td>
+                    <td><a href="{% url 'add_product' product.code %}" class="btn btn-primary">입고</a></td>
+                    <td><a href="{% url 'subtract_product' product.code %}" class="btn btn-primary">출고</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

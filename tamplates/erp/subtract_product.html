@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    상품 출고
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 상품 출고</h2>
+            <form class="form-area" method="post" action="/subtract_product/{{ product.code}}/">
+                {% csrf_token %}
+                <div class="form-group mt-2 mb-2">
+                    <label for="code">상품코드</label>
+                    <input type="text" class="form-control" id="code" name="code" value="{{ product.code }}" readonly>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="current_stock">현재 수량</label>
+                    <input type="number" class="form-control" id="current_stock" name="current_stock" value="{{ product.stock }}" readonly>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="subtract_stock">출고 수량</label>
+                    <input type="number" class="form-control" id="subtract_stock" name="subtract_stock" value= "0">
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">출고 저장</button>
+                    <a href="/product" class="btn btn-secondary">상품 페이지로</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
